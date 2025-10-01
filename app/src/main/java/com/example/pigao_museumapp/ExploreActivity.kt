@@ -71,6 +71,8 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
                 .padding(vertical = 12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
+
+
         ) {
             Text(
                 text = "Upcoming Event",
@@ -82,6 +84,8 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.clickable {
+                    val intent = Intent(context, TicketingActivity::class.java)
+                    context.startActivity(intent)
                 }
             ) {
                 Text(
