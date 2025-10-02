@@ -71,6 +71,8 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
                 .padding(vertical = 12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
+
+
         ) {
             Text(
                 text = "Upcoming Event",
