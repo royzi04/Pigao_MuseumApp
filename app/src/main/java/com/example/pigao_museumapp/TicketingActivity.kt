@@ -278,7 +278,7 @@ fun TicketSelector(
 
             Text(
                 count.toString(),
-                fontSize = 24.sp,
+                fontSize = 23.sp,
                 fontFamily = playfairdisplayregular,
                 color = Color.White,
                 modifier = Modifier.widthIn(min = 30.dp),
