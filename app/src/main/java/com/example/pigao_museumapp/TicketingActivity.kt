@@ -12,6 +12,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,6 +51,9 @@ class TicketingActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Ticketing() {
+    var generalAdmissionCount by remember { mutableStateOf(0) }
+    var freeTicketCount by remember { mutableStateOf(0) }
+
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = Instant.now()
             .plus(Duration.ofDays(2)).toEpochMilli(),
@@ -57,6 +64,8 @@ fun Ticketing() {
             }
         }
     )
+
+    val totalPrice = generalAdmissionCount * 500
 
     Column(
         modifier = Modifier.background(Color.Black)
@@ -132,8 +141,49 @@ fun Ticketing() {
                         disabledDayContentColor = Color.Gray
                     )
                 )
-                //general admission ticket
-                //free tickets
+
+                Spacer(modifier = Modifier.height(40.dp))
+
+                Text(
+                    "2. Number of Tickets",
+                    fontSize = 26.sp,
+                    fontFamily = playfairdisplayregular,
+                    color = Color(0xFFD29F1B),
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // General Admission Ticket
+                TicketSelector(
+                    title = "General Admission",
+                    price = "P500",
+                    count = generalAdmissionCount,
+                    onIncrement = { generalAdmissionCount++ },
+                    onDecrement = { if (generalAdmissionCount > 0) generalAdmissionCount-- }
+                )
+
+                Spacer(modifier = Modifier.height(30.dp))
+
+                Divider(
+                    color = Color(0xFFD29F1B).copy(alpha = 0.3f),
+                    thickness = 1.dp,
+                    modifier = Modifier.padding(vertical = 10.dp)
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // Free Ticket
+                TicketSelector(
+                    title = "Under 18s, Under 26s\nresidents of the EEA,\nMuseum members,\nProfessionals",
+                    price = "FREE",
+                    count = freeTicketCount,
+                    onIncrement = { freeTicketCount++ },
+                    onDecrement = { if (freeTicketCount > 0) freeTicketCount-- },
+                    priceColor = Color(0xFFD29F1B)
+                )
+
+                Spacer(modifier = Modifier.height(40.dp))
             }
         }
 
@@ -148,7 +198,7 @@ fun Ticketing() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                "Total: P500",
+                "Total: P$totalPrice",
                 fontSize = 26.sp,
                 fontFamily = playfairdisplayregular,
                 color = Color.Black,
@@ -165,6 +215,90 @@ fun Ticketing() {
                     fontFamily = playfairdisplayregular,
                     color = Color(0xFFD29F1B),
                     fontWeight = FontWeight.Normal
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun TicketSelector(
+    title: String,
+    price: String,
+    count: Int,
+    onIncrement: () -> Unit,
+    onDecrement: () -> Unit,
+    priceColor: Color = Color.White
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                title,
+                fontSize = 18.sp,
+                fontFamily = playfairdisplayregular,
+                color = Color.White,
+                lineHeight = 22.sp
+            )
+            Text(
+                price,
+                fontSize = 22.sp,
+                fontFamily = playfairdisplayregular,
+                color = priceColor,
+                fontWeight = FontWeight.Normal
+            )
+        }
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(15.dp)
+        ) {
+            OutlinedButton(
+                onClick = onDecrement,
+                modifier = Modifier.size(50.dp),
+                shape = MaterialTheme.shapes.extraLarge,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = Color(0xFFD29F1B)
+                ),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD29F1B)),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text(
+                    "−",
+                    fontSize = 24.sp,
+                    color = Color(0xFFD29F1B)
+                )
+            }
+
+            Text(
+                count.toString(),
+                fontSize = 24.sp,
+                fontFamily = playfairdisplayregular,
+                color = Color.White,
+                modifier = Modifier.widthIn(min = 30.dp),
+                textAlign = TextAlign.Center
+            )
+
+            OutlinedButton(
+                onClick = onIncrement,
+                modifier = Modifier.size(50.dp),
+                shape = MaterialTheme.shapes.extraLarge,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = Color(0xFFD29F1B)
+                ),
+                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFD29F1B)),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text(
+                    "+",
+                    fontSize = 24.sp,
+                    color = Color(0xFFD29F1B)
                 )
             }
         }
