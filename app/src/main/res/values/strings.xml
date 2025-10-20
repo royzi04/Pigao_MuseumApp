@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Pigao_MuseumApp</string>
+    <string name="title_activity_artists_page">ArtistsPage</string>
+    <string name="title_activity_exhibit_page">ExhibitPage</string>
 </resources>
