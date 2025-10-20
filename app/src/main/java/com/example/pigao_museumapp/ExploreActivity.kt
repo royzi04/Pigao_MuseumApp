@@ -74,13 +74,23 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
 
 
         ) {
-            Text(
-                text = "Upcoming Event",
-                fontFamily = optima,
-                fontSize = 18.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Normal
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = "Upcoming Event",
+                    fontFamily = optima,
+                    fontSize = 18.sp,
+                    color = Color.White,
+                    fontWeight = FontWeight.Normal
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                // Navigate to Artists page from Explore
+                AssistChip(onClick = {
+                    val intent = Intent(context, ArtistsActivity::class.java)
+                    context.startActivity(intent)
+                }, label = {
+                    Text("Artists", fontFamily = optima)
+                })
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.clickable {

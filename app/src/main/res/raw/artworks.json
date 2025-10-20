@@ -1,0 +1,28 @@
+{
+  "artworks": [
+    {
+      "title": "The Birth of Venus",
+      "artist": "Sandro Botticelli",
+      "year": "c. 1484–1486",
+      "place": "Florence, Italy",
+      "image": "renaissance",
+      "comment": "A hallmark of Early Renaissance capturing mythological beauty."
+    },
+    {
+      "title": "Mona Lisa",
+      "artist": "Leonardo da Vinci",
+      "year": "1503–1506",
+      "place": "Florence, Italy",
+      "image": "louvre",
+      "comment": "Renowned portrait celebrated for its enigmatic smile."
+    },
+    {
+      "title": "The Last Supper",
+      "artist": "Leonardo da Vinci",
+      "year": "c. 1495–1498",
+      "place": "Milan, Italy",
+      "image": "beautiful",
+      "comment": "Depicts Jesus and the apostles during the last supper."
+    }
+  ]
+}
