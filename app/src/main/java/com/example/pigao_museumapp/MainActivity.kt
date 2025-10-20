@@ -25,7 +25,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pigao_museumapp.ui.theme.Pigao_MuseumAppTheme
-import kotlin.jvm.java
 
 
 // Define custom fonts
@@ -58,11 +57,11 @@ fun Homepage(modifier: Modifier = Modifier) {
     ) {
         // Background image
         Image(
-            painter = painterResource(id = R.drawable.louvre), // Replace with your image name
+            painter = painterResource(id = R.drawable.louvre),
             contentDescription = "Louvre Museum",
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(500.dp), // Adjust size as needed
+                .size(500.dp),
             contentScale = ContentScale.Fit
         )
 
@@ -81,7 +80,7 @@ fun Homepage(modifier: Modifier = Modifier) {
         ) {
             // Logo at the top
             Image(
-                painter = painterResource(id = R.drawable.logo), // Replace with your logo
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Gallery Logo",
                 modifier = Modifier
                     .size(140.dp)

@@ -12,9 +12,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,8 +51,8 @@ class TicketingActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Ticketing() {
-    var generalAdmissionCount by remember { mutableStateOf(0) }
-    var freeTicketCount by remember { mutableStateOf(0) }
+    var generalAdmissionCount by remember { mutableIntStateOf(0) }
+    var freeTicketCount by remember { mutableIntStateOf(0) }
 
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = Instant.now()
@@ -68,12 +68,15 @@ fun Ticketing() {
     val totalPrice = generalAdmissionCount * 500
 
     Column(
-        modifier = Modifier.background(Color.Black)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
     ) {
         Column(
             modifier = Modifier
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
         ) {
             // Header
             Box(
@@ -125,7 +128,8 @@ fun Ticketing() {
                         Text(
                             "1. Date to Visit",
                             fontSize = 26.sp,
-                            fontFamily = playfairdisplayregular
+                            fontFamily = playfairdisplayregular,
+                            color = Color.White
                         )
                     },
                     colors = DatePickerDefaults.colors(
