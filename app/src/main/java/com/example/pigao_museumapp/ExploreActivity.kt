@@ -194,7 +194,10 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
 
                 // Visit Gallery button
                 Button(
-                    onClick = { /* TODO: Visit gallery action */ },
+                    onClick = {
+                        val intent = Intent(context, ArtistsActivity::class.java)
+                        context.startActivity(intent)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),

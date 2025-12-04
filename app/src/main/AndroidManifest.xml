@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pigao_MuseumApp">
         <activity
-            android:name=".ExhibitPage"
+            android:name=".ExhibitActivity"
             android:exported="false"
             android:label="@string/title_activity_exhibit_page"
             android:theme="@style/Theme.Pigao_MuseumApp" />
         <activity
-            android:name=".ArtistsPage"
+            android:name=".ArtistsActivity"
             android:exported="false"
             android:label="@string/title_activity_artists_page"
             android:theme="@style/Theme.Pigao_MuseumApp" />

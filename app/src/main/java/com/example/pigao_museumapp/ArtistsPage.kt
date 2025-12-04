@@ -1,5 +1,6 @@
 package com.example.pigao_museumapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
@@ -202,7 +204,7 @@ fun ArtistsPage() {
                         modifier = Modifier.fillMaxSize()
                     ) {
                         items(artists) { artist ->
-                            ArtistItem(artist)
+                            ArtistItemWithNavigation(artist = artist)
                         }
                     }
                 }
@@ -224,14 +226,54 @@ fun ArtistsPage() {
     }
 }
 
+// Helper function to map drawable IDs to artwork titles
+fun getArtworkTitleFromDrawable(drawableId: Int): String? {
+    return when (drawableId) {
+        R.drawable.mona_lisa -> "Mona Lisa"
+        R.drawable.lady_ermine -> "Lady Ermine"
+        R.drawable.litta_madonna -> "Litta Madonna"
+        R.drawable.david -> "David"
+        R.drawable.torment_of_saint_anthony -> "Torment of Saint Anthony"
+        R.drawable.delphic_sibyl -> "Delphic Sibyl"
+        R.drawable.adele_bloch_bauer -> "Adele Bloch-Bauer"
+        R.drawable.lady_with_fan -> "Lady with Fan"
+        R.drawable.the_kiss -> "The Kiss"
+        else -> null
+    }
+}
+
 @Composable
-fun ArtistItem(artist: Artist) {
+fun ArtistItemWithNavigation(artist: Artist) {
+    val context = LocalContext.current
+    
+    ArtistItem(
+        artist = artist,
+        onClick = {
+            // Navigate to ExhibitActivity with artist's artworks
+            val intent = Intent(context, ExhibitActivity::class.java)
+            // Pass artwork titles as intent extra
+            val artworkTitles = artist.artworks.map { drawableId ->
+                getArtworkTitleFromDrawable(drawableId)
+            }.filterNotNull()
+            intent.putStringArrayListExtra("artwork_titles", ArrayList(artworkTitles))
+            context.startActivity(intent)
+        }
+    )
+}
+
+@Composable
+fun ArtistItem(
+    artist: Artist,
+    onClick: () -> Unit = {}
+) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        // Top: Large artist avatar with name and dates
+        // Top: Large artist avatar with name and dates - clickable
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onClick),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
